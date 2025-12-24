@@ -29,10 +29,10 @@ function App() {
   }, [])
 
   const categories = [
-    { category: 'all', name: '全部维度', icon: '🌌', color: '#00f2ff' },
-    { category: 'future', name: '未来视界', icon: '🚀', color: '#00ff88' },
-    { category: 'tech', name: '科技矩阵', icon: '💻', color: '#9d00ff' },
-    { category: 'cyber', name: '赛博空间', icon: '🔮', color: '#ff0088'  },
+    { id: 'all', name: '全部维度', icon: '🌌', color: '#00f2ff' },
+    { id: '未来视界', name: '未来视界', icon: '🚀', color: '#00ff88' },
+    { id: '科技矩阵', name: '科技矩阵', icon: '💻', color: '#9d00ff' },
+    { id: '赛博空间', name: '赛博空间', icon: '🔮', color: '#ff0088'  },
   ]
 
   const filteredPhotos = activeCategory === 'all' 
