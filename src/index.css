@@ -267,3 +267,32 @@ body::after {
   transform: translateY(-2px);
   color: #00f2ff;
 }
+
+/* 添加弹出层动画 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 确保弹出层在最前面 */
+.nav-dropdown,
+.stats-dropdown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* 防止内容被遮挡 */
+main {
+  position: relative;
+  z-index: 10;
+}
+
+header {
+  position: relative;
+  z-index: 100;
+}
