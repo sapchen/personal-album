@@ -232,3 +232,15 @@ body::after {
     background-position: 100% 50%;
   }
 }
+
+/* 悬停显示统计卡片 */
+.header-stats-container {
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.header-stats-container:hover .stats-dropdown {
+  top: 0; /* 鼠标悬停时下滑显示 */
+}

@@ -92,7 +92,7 @@ function App() {
             width: '100%'
           }}>
             <h1 style={{
-              fontSize: '2.5rem',
+              fontSize: '2.0rem',
               fontWeight: 300,
               margin: '0 0 10px 0',
               letterSpacing: '0.2em'
@@ -105,87 +105,152 @@ function App() {
               </span>
             </h1>
           </div>
-
-          {/* 分类导航 */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '12px',
-            padding: '10px 0'
-          }}>
-            {categories.map(category => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className="hover-glow"
-                style={{
-                  padding: '12px 24px',
-                  border: 'none',
-                  borderRadius: '12px',
-                  background: activeCategory === category.id 
-                    ? 'linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 85, 255, 0.2))' 
-                    : 'rgba(20, 25, 50, 0.4)',
-                  backdropFilter: 'blur(10px)',
-                  color: activeCategory === category.id ? '#00f2ff' : '#a0a0ff',
-                  cursor: 'pointer',
-                  fontSize: '0.9rem',
-                  fontWeight: 400,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: 'all 0.3s',
-                  border: activeCategory === category.id 
-                    ? '1px solid rgba(0, 242, 255, 0.3)' 
-                    : '1px solid rgba(100, 150, 255, 0.1)',
-                  boxShadow: activeCategory === category.id 
-                    ? '0 0 20px rgba(0, 242, 255, 0.2)' 
-                    : 'none'
-                }}
-              >
-                <span style={{ fontSize: '1.1rem' }}>{category.icon}</span>
-                {category.name}
-              </button>
-            ))}
+          
+          {/* 分类导航 - 悬停显示 */}
+          <div 
+            className="nav-section"
+            style={{
+              width: '100%',
+              position: 'relative',
+              height: '45px',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={() => setShowCategories(true)}
+            onMouseLeave={() => setShowCategories(false)}
+          >
+            {/* 悬停提示 */}
+            <div style={{
+              textAlign: 'center',
+              color: '#a0a0ff',
+              fontSize: '0.9rem',
+              opacity: 0.6,
+              padding: '12px',
+              transition: 'opacity 0.3s'
+            }}>
+              {showCategories ? '选择维度分类' : '📁 展开分类导航'}
+            </div>
+            
+            {/* 分类导航卡片 */}
+            <div 
+              className="nav-dropdown"
+              style={{
+                position: 'absolute',
+                top: showCategories ? '0' : '-100%',
+                left: '0',
+                right: '0',
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                gap: '12px',
+                padding: '15px 20px',
+                background: 'rgba(20, 25, 50, 0.95)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '0 0 15px 15px',
+                border: '1px solid rgba(100, 150, 255, 0.2)',
+                borderTop: 'none',
+                transition: 'top 0.3s ease',
+                zIndex: 10
+              }}
+            >
+              {categories.map(category => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className="hover-glow"
+                  style={{
+                    padding: '10px 20px',
+                    border: 'none',
+                    borderRadius: '10px',
+                    background: activeCategory === category.id 
+                      ? 'linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 85, 255, 0.2))' 
+                      : 'rgba(20, 25, 50, 0.4)',
+                    backdropFilter: 'blur(10px)',
+                    color: activeCategory === category.id ? '#00f2ff' : '#a0a0ff',
+                    cursor: 'pointer',
+                    fontSize: '0.85rem',
+                    fontWeight: 400,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    transition: 'all 0.3s',
+                    border: activeCategory === category.id 
+                      ? '1px solid rgba(0, 242, 255, 0.3)' 
+                      : '1px solid rgba(100, 150, 255, 0.1)'
+                  }}
+                >
+                  <span style={{ fontSize: '1rem' }}>{category.icon}</span>
+                  {category.name}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* 数据统计 */}
-          <div style={{
-            display: 'flex',
-            gap: '30px',
-            color: '#a0a0ff',
-            fontSize: '0.9rem',
-            opacity: 0.8
-          }}>
-            <div style={{ textAlign: 'center' }}>
-              <div className="digital-font" style={{ 
-                fontSize: '1.2rem', 
-                color: '#00f2ff',
-                marginBottom: '4px'
-              }}>
-                {photos.length}
-              </div>
-              <div>数据节点</div>
+          {/* 数据统计 - 悬停显示 */}
+          <div 
+            className="stats-section"
+            style={{
+              width: '100%',
+              position: 'relative',
+              height: '45px',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={() => setShowStats(true)}
+            onMouseLeave={() => setShowStats(false)}
+          >
+            {/* 悬停提示 */}
+            <div style={{
+              textAlign: 'center',
+              color: '#a0a0ff',
+              fontSize: '0.9rem',
+              opacity: 0.6,
+              padding: '12px',
+              transition: 'opacity 0.3s'
+            }}>
+              {showStats ? '系统统计数据' : '📊 查看统计信息'}
             </div>
-            <div style={{ textAlign: 'center' }}>
-              <div className="digital-font" style={{ 
-                fontSize: '1.2rem', 
-                color: '#00f2ff',
-                marginBottom: '4px'
-              }}>
-                {filteredPhotos.length}
-              </div>
-              <div>当前显示</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div className="digital-font" style={{ 
-                fontSize: '1.2rem', 
-                color: '#00f2ff',
-                marginBottom: '4px'
-              }}>
-                {categories.length}
-              </div>
-              <div>维度分类</div>
+            
+            {/* 统计卡片 */}
+            <div 
+              className="stats-dropdown"
+              style={{
+                position: 'absolute',
+                top: showStats ? '0' : '-100%',
+                left: '0',
+                right: '0',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '30px',
+                padding: '15px 20px',
+                background: 'rgba(20, 25, 50, 0.95)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '0 0 15px 15px',
+                border: '1px solid rgba(100, 150, 255, 0.2)',
+                borderTop: 'none',
+                transition: 'top 0.3s ease',
+                zIndex: 10
+              }}
+            >
+              {[
+                { label: '数据节点', value: photos.length },
+                { label: '当前显示', value: filteredPhotos.length },
+                { label: '维度分类', value: categories.length }
+              ].map((stat) => (
+                <div key={stat.label} style={{ textAlign: 'center' }}>
+                  <div className="digital-font" style={{ 
+                    fontSize: '1.2rem', 
+                    color: '#00f2ff',
+                    marginBottom: '4px'
+                  }}>
+                    {stat.value}
+                  </div>
+                  <div style={{ 
+                    fontSize: '0.85rem',
+                    color: '#a0a0ff'
+                  }}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
