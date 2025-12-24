@@ -58,21 +58,21 @@ function App() {
         className="glass-card"
         style={{
           position: 'fixed',
-          left: '20px',
+          left: '15px',  // 改为15px
           top: '50%',
           transform: 'translateY(-50%)',
-          width: sidebarExpanded ? '280px' : '70px',
+          width: sidebarExpanded ? '220px' : '60px',  // 缩小宽度
           height: 'auto',
-          maxHeight: '80vh',
-          borderRadius: '20px',
-          padding: sidebarExpanded ? '25px' : '20px 15px',
+          maxHeight: '70vh',  // 降低最大高度
+          borderRadius: '15px',  // 缩小圆角
+          padding: sidebarExpanded ? '20px' : '15px 10px',  // 缩小内边距
           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           zIndex: 100,
           display: 'flex',
           flexDirection: 'column',
-          gap: '25px',
+          gap: '20px',  // 缩小间距
           border: '1px solid rgba(100, 150, 255, 0.2)',
-          boxShadow: '0 20px 60px rgba(0, 0, 30, 0.6)',
+          boxShadow: '0 15px 40px rgba(0, 0, 30, 0.5)',  // 缩小阴影
           backdropFilter: 'blur(10px)',
           overflow: 'hidden'
         }}
@@ -87,7 +87,7 @@ function App() {
           marginBottom: '10px'
         }}>
           <div style={{
-            fontSize: '1.2rem',
+            fontSize: '0.8rem',
             color: '#00f2ff',
             opacity: sidebarExpanded ? 1 : 0.7
           }}>
@@ -99,7 +99,7 @@ function App() {
         <div style={{
           display: 'flex',
           flexDirection: sidebarExpanded ? 'column' : 'column',
-          gap: '15px'
+          gap: '12px'
         }}>
           {stats.map((stat, index) => (
             <div 
@@ -107,9 +107,9 @@ function App() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: sidebarExpanded ? '15px' : '0',
-                padding: sidebarExpanded ? '12px 15px' : '10px',
-                borderRadius: '12px',
+                gap: sidebarExpanded ? '12px' : '0',  // 缩小间距
+                padding: sidebarExpanded ? '10px 12px' : '8px',  // 缩小内边距
+                borderRadius: '10px',  // 缩小圆角
                 background: 'rgba(20, 25, 50, 0.4)',
                 border: `1px solid ${stat.color}30`,
                 transition: 'all 0.3s',
@@ -135,9 +135,9 @@ function App() {
               }} />
               
               <div style={{
-                fontSize: '1.5rem',
+                fontSize: '1rem',
                 color: stat.color,
-                minWidth: '30px',
+                minWidth: '20px',
                 textAlign: 'center'
               }}>
                 {stat.icon}
@@ -148,17 +148,17 @@ function App() {
                   flex: 1,
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '4px'
+                  gap: '2px'
                 }}>
                   <div className="digital-font" style={{
-                    fontSize: '1.4rem',
+                    fontSize: '1rem',
                     color: stat.color,
                     fontWeight: 600
                   }}>
                     {stat.value}
                   </div>
                   <div style={{
-                    fontSize: '0.8rem',
+                    fontSize: '0.7rem',
                     color: '#a0a0ff',
                     opacity: 0.8
                   }}>
@@ -174,16 +174,16 @@ function App() {
         {sidebarExpanded && (
           <div style={{
             borderTop: '1px solid rgba(100, 150, 255, 0.2)',
-            paddingTop: '20px'
+            paddingTop: '15px'
           }}>
             <div style={{
-              fontSize: '0.9rem',
+              fontSize: '0.85rem',  // 改为0.85rem
               color: '#a0a0ff',
-              marginBottom: '15px',
+              marginBottom: '12px',  // 改为12px
               opacity: 0.8,
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
+              gap: '6px'  // 改为6px
             }}>
               <span>📁</span>
               <span>维度分类</span>
@@ -192,26 +192,26 @@ function App() {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '10px'
+              gap: '8px'
             }}>
               {categories.map(category => (
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
                   style={{
-                    padding: '12px 15px',
+                    padding: '10px 12px',  // 缩小内边距
                     border: 'none',
-                    borderRadius: '10px',
+                    borderRadius: '8px',  // 缩小圆角
                     background: activeCategory === category.id 
                       ? `linear-gradient(135deg, ${category.color}20, ${category.color}10)` 
                       : 'rgba(20, 25, 50, 0.4)',
                     color: activeCategory === category.id ? category.color : '#a0a0ff',
                     cursor: 'pointer',
-                    fontSize: '0.9rem',
+                    fontSize: '0.85rem',  // 改为0.85rem
                     fontWeight: 400,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '12px',
+                    gap: '10px',  // 改为10px
                     transition: 'all 0.3s',
                     border: activeCategory === category.id 
                       ? `1px solid ${category.color}40` 
@@ -234,7 +234,7 @@ function App() {
                   }}
                 >
                   <div style={{
-                    fontSize: '1.2rem',
+                    fontSize: '1rem',
                     opacity: 0.9
                   }}>
                     {category.icon}
@@ -265,7 +265,7 @@ function App() {
       {/* 主内容区域 */}
       <div style={{ 
         flex: 1,
-        marginLeft: sidebarExpanded ? '320px' : '100px', // 根据侧边栏状态调整边距
+        marginLeft: sidebarExpanded ? '240px' : '80px', // 根据侧边栏状态调整边距
         transition: 'margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         minHeight: '100vh'
       }}>
@@ -341,12 +341,12 @@ function App() {
               
               {/* 提示文字 */}
               <div style={{
-                fontSize: '0.9rem',
+                fontSize: '0.85rem',  // 改为0.85rem
                 color: '#a0a0ff',
                 opacity: 0.6,
-                padding: '8px 15px',
+                padding: '6px 12px',  // 缩小内边距
                 background: 'rgba(20, 25, 50, 0.4)',
-                borderRadius: '10px',
+                borderRadius: '8px',  // 缩小圆角
                 border: '1px solid rgba(100, 150, 255, 0.1)'
               }}>
                 悬停左侧展开控制面板
