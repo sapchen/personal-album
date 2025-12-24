@@ -63,7 +63,7 @@ function App() {
           transform: 'translateY(-50%)',
           width: sidebarExpanded ? '220px' : '60px',  // 缩小宽度
           height: 'auto',
-          maxHeight: '70vh',  // 降低最大高度
+          maxHeight: '100vh',  // 降低最大高度
           borderRadius: '15px',  // 缩小圆角
           padding: sidebarExpanded ? '20px' : '15px 10px',  // 缩小内边距
           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
