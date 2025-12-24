@@ -104,32 +104,6 @@ function App() {
                 DIGITAL ARCHIVE
               </span>
             </h1>
-            
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              fontSize: '0.9rem',
-              color: '#a0a0ff',
-              opacity: 0.8
-            }}>
-              <div style={{
-                width: '10px',
-                height: '10px',
-                background: '#00f2ff',
-                borderRadius: '50%',
-                boxShadow: '0 0 10px #00f2ff'
-              }} />
-              <span className="digital-font">SYSTEM ONLINE</span>
-              <div style={{
-                width: '10px',
-                height: '10px',
-                background: '#00f2ff',
-                borderRadius: '50%',
-                boxShadow: '0 0 10px #00f2ff'
-              }} />
-            </div>
           </div>
 
           {/* 分类导航 */}
