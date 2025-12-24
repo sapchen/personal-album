@@ -38,7 +38,7 @@ function App() {
           margin: '0 0 20px 0',
           color: '#2c3e50'
         }}>
-          我的相册
+          Cosmo Fu 的相册，powered by _061837@bupt
         </h1>
         
         <div style={{

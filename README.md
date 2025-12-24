@@ -1,6 +1,6 @@
-# 个人相册
+# 相册墙
 
-简洁的个人照片展示，自动部署到 GitHub Pages。
+简洁的照片展示，自动部署到 GitHub Pages。
 
 ## 使用
 
@@ -10,3 +10,6 @@
 
 ## 访问
 https://sapchen.github.io/personal-album
+
+## 许可协议
+CC BY-SA 4.0
