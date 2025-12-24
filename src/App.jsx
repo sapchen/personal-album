@@ -332,7 +332,7 @@ function App() {
           </div>
           
           <p style={{ margin: 0, maxWidth: '600px', lineHeight: 1.6 }}>
-            数字记忆档案库 • 基于量子加密技术 • 数据永久保存
+            Powered By _061837@bupt • All Rights Reserved
           </p>
           
           <div style={{
