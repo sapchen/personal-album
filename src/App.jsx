@@ -85,9 +85,7 @@ function App() {
         color: '#95a5a6',
         fontSize: '0.9rem'
       }}>
-        Powered by _061837@bupt • {new Date().getFullYear()} • <a href="https://github.com/sapchen/personal-album" target="_blank" rel="noopener noreferrer">
-  GitHub
-</a>
+        Powered by _061837@bupt • {new Date().getFullYear()}
       </footer>
     </div>
   )
