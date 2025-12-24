@@ -1,6 +1,6 @@
-# 相册墙
+# Cosmo Fu 的相册墙
 
-简洁的照片展示，自动部署到 GitHub Pages。
+简洁的照片作品展示web应用，自动部署到 GitHub Pages。
 
 ## 使用
 
