@@ -6,8 +6,7 @@ function App() {
   const [photos, setPhotos] = useState([])
   const [activeCategory, setActiveCategory] = useState('all')
   const [loading, setLoading] = useState(true)
-  const [showStats, setShowStats] = useState(false)
-  const [showCategories, setShowCategories] = useState(false)
+  const [sidebarExpanded, setSidebarExpanded] = useState(false)
 
   useEffect(() => {
     fetch('./data.json')
@@ -30,16 +29,22 @@ function App() {
   }, [])
 
   const categories = [
-    { id: 'all', name: '全部维度', icon: '🌌' },
-    { id: 'future', name: '未来视界', icon: '🚀' },
-    { id: 'tech', name: '科技矩阵', icon: '💻' },
-    { id: 'cyber', name: '赛博空间', icon: '🔮' },
-    { id: 'neon', name: '霓虹记忆', icon: '✨' }
+    { category: 'all', name: '全部维度', icon: '🌌', color: '#00f2ff' },
+    { category: 'future', name: '未来视界', icon: '🚀', color: '#00ff88' },
+    { category: 'tech', name: '科技矩阵', icon: '💻', color: '#9d00ff' },
+    { category: 'cyber', name: '赛博空间', icon: '🔮', color: '#ff0088'  },
   ]
 
   const filteredPhotos = activeCategory === 'all' 
     ? photos 
     : photos.filter(photo => photo.category === activeCategory)
+
+  // 统计数据
+  const stats = [
+    { label: '数据节点', value: photos.length, icon: '💾', color: '#00f2ff' },
+    { label: '当前显示', value: filteredPhotos.length, icon: '👁️', color: '#00ff88' },
+    { label: '维度分类', value: categories.length - 1, icon: '🧬', color: '#9d00ff' }
+  ]
 
   return (
     <div style={{ 
