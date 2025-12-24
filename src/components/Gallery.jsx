@@ -468,7 +468,7 @@ const Gallery = ({ photos }) => {
                   height: '1px',
                   background: 'linear-gradient(to right, transparent, #00f2ff)'
                 }} />
-                <span style={{ fontSize: '1rem' }}→</span>
+                <span style={{ fontSize: '1rem' }}>→</span>
               </div>
             </div>
           </div>
