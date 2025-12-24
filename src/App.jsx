@@ -359,8 +359,6 @@ function App() {
   )
 }
 
-
-
 const Footer = () => {
   return (
     <footer className="footer">
@@ -371,12 +369,6 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="github-link"
         >
-          <img 
-            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
-            alt="GitHub" 
-            width="20" 
-            height="20"
-          />
           Github 源码
         </a>
       </div>
