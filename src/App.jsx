@@ -359,4 +359,27 @@ function App() {
   )
 }
 
+const Footer = () => {
+  return (
+    <footer className="footer">
+      <div className="container">
+        <a 
+          href="https://github.com/sapchen/personal-album" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="github-link"
+        >
+          <img 
+            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+            alt="GitHub" 
+            width="20" 
+            height="20"
+          />
+          Github 源码
+        </a>
+      </div>
+    </footer>
+  )
+}
+
 export default App
