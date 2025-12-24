@@ -332,7 +332,7 @@ function App() {
           </div>
           
           <p style={{ margin: 0, maxWidth: '600px', lineHeight: 1.6 }}>
-            Powered By _061837@bupt • All Rights Reserved
+            Powered By _061837@bupt • All Rights Reserved • <Footer />
           </p>
           
           <div style={{
@@ -359,7 +359,7 @@ function App() {
   )
 }
 
-<Footer />
+
 
 const Footer = () => {
   return (
