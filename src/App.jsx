@@ -311,28 +311,9 @@ function App() {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '15px'
-        }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '20px',
-            marginBottom: '10px'
-          }}>
-            <div className="digital-font" style={{ fontSize: '0.8rem' }}>
-              V 1.0.0
-            </div>
-            <div style={{
-              width: '1px',
-              height: '20px',
-              background: 'linear-gradient(to bottom, transparent, #00f2ff, transparent)'
-            }} />
-            <div className="digital-font" style={{ fontSize: '0.8rem' }}>
-              {new Date().getFullYear()}
-            </div>
-          </div>
-          
+        }}>          
           <p style={{ margin: 0, maxWidth: '600px', lineHeight: 1.6 }}>
-            Powered By _061837@bupt • All Rights Reserved 
+            Powered By _061837@bupt • ©2025 • All Rights Reserved 
             <Footer />
           </p>
           
