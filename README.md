@@ -1,4 +1,4 @@
-# Cosmo Fu 的相册墙
+# Cosmo Fu 的相册长廊
 
 简洁的照片作品展示web应用，自动部署到 GitHub Pages。
 
