@@ -18,7 +18,10 @@ function App() {
         setPhotos([
           { id: 1, url: 'photos/01.jpg', title: '数字黎明', date: '2023-05-15', category: 'future' },
           { id: 2, url: 'photos/02.jpg', title: '矩阵光影', date: '2023-08-20', category: 'tech' },
-          { id: 3, url: 'photos/03.jpg', title: '量子之夜', date: '2024-01-01', category: 'cyber' }
+          { id: 3, url: 'photos/03.jpg', title: '量子之夜', date: '2024-01-01', category: 'cyber' },
+          { id: 4, url: 'photos/04.jpg', title: '灿烂篝火', date: '2024-02-20', category: 'future' },
+          { id: 5, url: 'photos/05.jpg', title: '快乐老家', date: '2024-11-08', category: 'tech' },
+          { id: 6, url: 'photos/06.jpg', title: '你好未来', date: '2025-12-24', category: 'cyber' }
         ])
         setLoading(false)
       })
