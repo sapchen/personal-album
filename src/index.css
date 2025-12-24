@@ -244,3 +244,26 @@ body::after {
 .header-stats-container:hover .stats-dropdown {
   top: 0; /* 鼠标悬停时下滑显示 */
 }
+
+/* GitHub链接样式 */
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #a0a0ff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 6px 15px;
+  border-radius: 20px;
+  background: rgba(0, 242, 255, 0.1);
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.github-link:hover {
+  background: rgba(0, 242, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+  transform: translateY(-2px);
+  color: #00f2ff;
+}
