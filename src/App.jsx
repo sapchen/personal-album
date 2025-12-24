@@ -45,290 +45,277 @@ function App() {
     <div style={{ 
       minHeight: '100vh', 
       background: 'linear-gradient(180deg, #0a0a0f 0%, #101020 100%)',
-      position: 'relative'
+      position: 'relative',
+      display: 'flex'
     }}>
-      {/* 背景装饰元素 */}
-      <div style={{
-        position: 'fixed',
-        top: '10%',
-        right: '5%',
-        width: '300px',
-        height: '300px',
-        background: 'radial-gradient(circle, rgba(0, 100, 255, 0.1) 0%, transparent 70%)',
-        filter: 'blur(40px)',
-        zIndex: 0
-      }} />
-      
-      <div style={{
-        position: 'fixed',
-        bottom: '20%',
-        left: '5%',
-        width: '200px',
-        height: '200px',
-        background: 'radial-gradient(circle, rgba(150, 0, 255, 0.1) 0%, transparent 70%)',
-        filter: 'blur(40px)',
-        zIndex: 0
-      }} />
-
-      <header className="glass-card" style={{
-        padding: '20px 20px 0 20px',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-        marginBottom: '40px',
-        borderRadius: '0 0 20px 20px'
-      }}>
-        <div style={{
-          maxWidth: '1400px',
-          margin: '0 auto',
+      {/* 左侧悬浮侧边栏 */}
+      <div 
+        className="glass-card"
+        style={{
+          position: 'fixed',
+          left: '20px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          width: sidebarExpanded ? '280px' : '70px',
+          height: 'auto',
+          maxHeight: '80vh',
+          borderRadius: '20px',
+          padding: sidebarExpanded ? '25px' : '20px 15px',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          zIndex: 100,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          gap: '25px',
+          border: '1px solid rgba(100, 150, 255, 0.2)',
+          boxShadow: '0 20px 60px rgba(0, 0, 30, 0.6)',
+          backdropFilter: 'blur(10px)',
+          overflow: 'hidden'
+        }}
+        onMouseEnter={() => setSidebarExpanded(true)}
+        onMouseLeave={() => setSidebarExpanded(false)}
+      >
+        {/* 展开/收缩指示器 */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '10px'
         }}>
-          {/* 标题部分 */}
           <div style={{
-            textAlign: 'center',
-            paddingBottom: '15px',
-            borderBottom: '1px solid rgba(100, 150, 255, 0.2)',
-            width: '100%',
-            position: 'relative',
-            zIndex: 110
+            fontSize: '1.2rem',
+            color: '#00f2ff',
+            opacity: sidebarExpanded ? 1 : 0.7
           }}>
-            <h1 style={{
-              fontSize: '2.0rem',
-              fontWeight: 300,
-              margin: '0 0 10px 0',
-              letterSpacing: '0.2em'
-            }}>
-              <span className="gradient-text" style={{
-                fontFamily: "'Courier New', monospace",
-                fontWeight: 600
-              }}>
-                DIGITAL ARCHIVE
-              </span>
-            </h1>
-          </div>
-          
-          {/* 主要悬停区域 - 单独容器，不限制溢出 */}
-          <div style={{
-            width: '100%',
-            position: 'relative'
-          }}>
-            
-            {/* 分类导航 */}
-            <div 
-              style={{
-                width: '100%',
-                position: 'relative',
-                height: '45px',
-                marginBottom: '5px'
-              }}
-              onMouseEnter={() => setShowCategories(true)}
-              onMouseLeave={() => setShowCategories(false)}
-            >
-              {/* 悬停提示 */}
-              <div style={{
-                textAlign: 'center',
-                color: '#a0a0ff',
-                fontSize: '0.9rem',
-                opacity: showCategories ? 0 : 0.6,
-                padding: '12px',
-                transition: 'opacity 0.3s',
-                position: 'relative',
-                zIndex: 1
-              }}>
-                📁 展开分类导航
-              </div>
-              
-              {/* 分类导航卡片 - 使用固定定位，脱离文档流 */}
-              <div 
-                style={{
-                  position: 'fixed', // 改为 fixed 定位
-                  top: showCategories ? '140px' : '-100vh', // 根据悬停状态定位
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  justifyContent: 'center',
-                  gap: '12px',
-                  padding: '20px',
-                  background: 'rgba(20, 25, 50, 0.98)',
-                  backdropFilter: 'blur(15px)',
-                  borderRadius: '15px',
-                  border: '1px solid rgba(100, 150, 255, 0.3)',
-                  boxShadow: '0 20px 60px rgba(0, 0, 30, 0.8)',
-                  transition: 'top 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                  zIndex: 120,
-                  width: '90%',
-                  maxWidth: '1000px',
-                  minHeight: 'auto'
-                }}
-              >
-                {categories.map(category => (
-                  <button
-                    key={category.id}
-                    onClick={() => setActiveCategory(category.id)}
-                    className="hover-glow"
-                    style={{
-                      padding: '12px 24px',
-                      border: 'none',
-                      borderRadius: '10px',
-                      background: activeCategory === category.id 
-                        ? 'linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 85, 255, 0.2))' 
-                        : 'rgba(20, 25, 50, 0.6)',
-                      backdropFilter: 'blur(10px)',
-                      color: activeCategory === category.id ? '#00f2ff' : '#a0a0ff',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
-                      fontWeight: 400,
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      transition: 'all 0.3s',
-                      border: activeCategory === category.id 
-                        ? '1px solid rgba(0, 242, 255, 0.3)' 
-                        : '1px solid rgba(100, 150, 255, 0.1)'
-                    }}
-                  >
-                    <span style={{ fontSize: '1.1rem' }}>{category.icon}</span>
-                    {category.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 数据统计 */}
-            <div 
-              style={{
-                width: '100%',
-                position: 'relative',
-                height: '45px'
-              }}
-              onMouseEnter={() => setShowStats(true)}
-              onMouseLeave={() => setShowStats(false)}
-            >
-              {/* 悬停提示 */}
-              <div style={{
-                textAlign: 'center',
-                color: '#a0a0ff',
-                fontSize: '0.9rem',
-                opacity: showStats ? 0 : 0.6,
-                padding: '12px',
-                transition: 'opacity 0.3s',
-                position: 'relative',
-                zIndex: 1
-              }}>
-                📊 查看统计信息
-              </div>
-              
-              {/* 统计卡片 - 使用固定定位，脱离文档流 */}
-              <div 
-                style={{
-                  position: 'fixed',
-                  top: showStats ? '140px' : '-100vh',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  gap: '40px',
-                  padding: '25px 40px',
-                  background: 'rgba(20, 25, 50, 0.98)',
-                  backdropFilter: 'blur(15px)',
-                  borderRadius: '15px',
-                  border: '1px solid rgba(100, 150, 255, 0.3)',
-                  boxShadow: '0 20px 60px rgba(0, 0, 30, 0.8)',
-                  transition: 'top 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                  zIndex: 120,
-                  width: '90%',
-                  maxWidth: '800px',
-                  minHeight: 'auto'
-                }}
-              >
-                {[
-                  { label: '数据节点', value: photos.length },
-                  { label: '当前显示', value: filteredPhotos.length },
-                  { label: '维度分类', value: categories.length - 1 }
-                ].map((stat) => (
-                  <div key={stat.label} style={{ 
-                    textAlign: 'center',
-                    padding: '0 20px'
-                  }}>
-                    <div className="digital-font" style={{ 
-                      fontSize: '2rem', // 增大字体
-                      color: '#00f2ff',
-                      marginBottom: '8px',
-                      textShadow: '0 0 20px rgba(0, 242, 255, 0.5)'
-                    }}>
-                      {stat.value}
-                    </div>
-                    <div style={{ 
-                      fontSize: '0.95rem',
-                      color: '#a0a0ff',
-                      opacity: 0.9
-                    }}>
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {sidebarExpanded ? '◀ 控制面板' : '▶'}
           </div>
         </div>
-      </header>
 
-      <main style={{
-        padding: '0 20px 40px',
-        maxWidth: '1600px',
-        margin: '0 auto',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        {loading ? (
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '60vh',
-            color: '#a0a0ff'
-          }}>
-            <div className="loading-dots">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+        {/* 统计数据 */}
+        <div style={{
+          display: 'flex',
+          flexDirection: sidebarExpanded ? 'column' : 'column',
+          gap: '15px'
+        }}>
+          {stats.map((stat, index) => (
+            <div 
+              key={stat.label}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: sidebarExpanded ? '15px' : '0',
+                padding: sidebarExpanded ? '12px 15px' : '10px',
+                borderRadius: '12px',
+                background: 'rgba(20, 25, 50, 0.4)',
+                border: `1px solid ${stat.color}30`,
+                transition: 'all 0.3s',
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = `rgba(${parseInt(stat.color.slice(1,3), 16)}, ${parseInt(stat.color.slice(3,5), 16)}, ${parseInt(stat.color.slice(5,7), 16)}, 0.2)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(20, 25, 50, 0.4)';
+              }}
+            >
+              {/* 装饰线 */}
+              <div style={{
+                position: 'absolute',
+                left: '0',
+                top: '0',
+                bottom: '0',
+                width: '3px',
+                background: `linear-gradient(to bottom, ${stat.color}, transparent)`
+              }} />
+              
+              <div style={{
+                fontSize: '1.5rem',
+                color: stat.color,
+                minWidth: '30px',
+                textAlign: 'center'
+              }}>
+                {stat.icon}
+              </div>
+              
+              {sidebarExpanded && (
+                <div style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px'
+                }}>
+                  <div className="digital-font" style={{
+                    fontSize: '1.4rem',
+                    color: stat.color,
+                    fontWeight: 600
+                  }}>
+                    {stat.value}
+                  </div>
+                  <div style={{
+                    fontSize: '0.8rem',
+                    color: '#a0a0ff',
+                    opacity: 0.8
+                  }}>
+                    {stat.label}
+                  </div>
+                </div>
+              )}
             </div>
-            <div style={{ marginTop: '30px', fontSize: '1.1rem' }}>
-              正在加载数字档案...
+          ))}
+        </div>
+
+        {/* 分类导航 */}
+        {sidebarExpanded && (
+          <div style={{
+            borderTop: '1px solid rgba(100, 150, 255, 0.2)',
+            paddingTop: '20px'
+          }}>
+            <div style={{
+              fontSize: '0.9rem',
+              color: '#a0a0ff',
+              marginBottom: '15px',
+              opacity: 0.8,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span>📁</span>
+              <span>维度分类</span>
+            </div>
+            
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px'
+            }}>
+              {categories.map(category => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  style={{
+                    padding: '12px 15px',
+                    border: 'none',
+                    borderRadius: '10px',
+                    background: activeCategory === category.id 
+                      ? `linear-gradient(135deg, ${category.color}20, ${category.color}10)` 
+                      : 'rgba(20, 25, 50, 0.4)',
+                    color: activeCategory === category.id ? category.color : '#a0a0ff',
+                    cursor: 'pointer',
+                    fontSize: '0.9rem',
+                    fontWeight: 400,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    transition: 'all 0.3s',
+                    border: activeCategory === category.id 
+                      ? `1px solid ${category.color}40` 
+                      : '1px solid rgba(100, 150, 255, 0.1)',
+                    textAlign: 'left',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeCategory !== category.id) {
+                      e.currentTarget.style.background = 'rgba(20, 25, 50, 0.6)';
+                      e.currentTarget.style.transform = 'translateX(5px)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeCategory !== category.id) {
+                      e.currentTarget.style.background = 'rgba(20, 25, 50, 0.4)';
+                      e.currentTarget.style.transform = 'translateX(0)';
+                    }
+                  }}
+                >
+                  <div style={{
+                    fontSize: '1.2rem',
+                    opacity: 0.9
+                  }}>
+                    {category.icon}
+                  </div>
+                  <span>{category.name}</span>
+                  
+                  {/* 激活状态指示器 */}
+                  {activeCategory === category.id && (
+                    <div style={{
+                      position: 'absolute',
+                      right: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: category.color,
+                      boxShadow: `0 0 10px ${category.color}`
+                    }} />
+                  )}
+                </button>
+              ))}
             </div>
           </div>
-        ) : (
-          <>
+        )}
+      </div>
+
+      {/* 主内容区域 */}
+      <div style={{ 
+        flex: 1,
+        marginLeft: sidebarExpanded ? '320px' : '100px', // 根据侧边栏状态调整边距
+        transition: 'margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        minHeight: '100vh'
+      }}>
+        <header className="glass-card" style={{
+          padding: '25px 40px',
+          margin: '20px 40px 40px 40px',
+          borderRadius: '20px',
+          position: 'relative'
+        }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <div>
+              <h1 style={{
+                fontSize: '2.5rem',
+                fontWeight: 300,
+                margin: '0 0 10px 0',
+                letterSpacing: '0.1em'
+              }}>
+                <span className="gradient-text" style={{
+                  fontFamily: "'Courier New', monospace",
+                  fontWeight: 600
+                }}>
+                  DIGITAL ARCHIVE
+                </span>
+              </h1>
+              <p style={{
+                margin: 0,
+                color: '#a0a0ff',
+                fontSize: '1rem',
+                opacity: 0.7,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
+              }}>
+                <span>📂 当前分类: </span>
+                <span style={{
+                  padding: '4px 12px',
+                  background: 'rgba(0, 242, 255, 0.1)',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(0, 242, 255, 0.3)',
+                  color: '#00f2ff'
+                }}>
+                  {categories.find(c => c.id === activeCategory)?.name || '全部维度'}
+                </span>
+              </p>
+            </div>
+            
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '30px',
-              padding: '0 10px'
+              gap: '20px'
             }}>
-              <h2 style={{
-                fontSize: '1.3rem',
-                color: '#e0e0ff',
-                margin: 0,
-                fontWeight: 400
-              }}>
-                <span className="gradient-text">档案浏览</span>
-                <span style={{
-                  fontSize: '0.9rem',
-                  color: '#a0a0ff',
-                  marginLeft: '15px',
-                  fontWeight: 300,
-                  opacity: 0.7
-                }}>
-                  {categories.find(c => c.id === activeCategory)?.name}
-                </span>
-              </h2>
-              
               <div style={{
                 color: '#a0a0ff',
                 fontSize: '0.9rem',
@@ -346,103 +333,157 @@ function App() {
                 }} />
                 <span className="digital-font">LIVE</span>
               </div>
+              
+              {/* 提示文字 */}
+              <div style={{
+                fontSize: '0.9rem',
+                color: '#a0a0ff',
+                opacity: 0.6,
+                padding: '8px 15px',
+                background: 'rgba(20, 25, 50, 0.4)',
+                borderRadius: '10px',
+                border: '1px solid rgba(100, 150, 255, 0.1)'
+              }}>
+                悬停左侧展开控制面板
+              </div>
             </div>
+          </div>
+        </header>
 
-            <Gallery photos={filteredPhotos} />
-          </>
-        )}
-      </main>
+        <main style={{
+          padding: '0 40px 40px',
+          position: 'relative'
+        }}>
+          {loading ? (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '60vh',
+              color: '#a0a0ff'
+            }}>
+              <div className="loading-dots">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div style={{ marginTop: '30px', fontSize: '1.1rem' }}>
+                正在加载数字档案...
+              </div>
+            </div>
+          ) : (
+            <>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '30px',
+                padding: '0 10px'
+              }}>
+                <h2 style={{
+                  fontSize: '1.5rem',
+                  color: '#e0e0ff',
+                  margin: 0,
+                  fontWeight: 400
+                }}>
+                  <span className="gradient-text">档案浏览</span>
+                  <span style={{
+                    fontSize: '1rem',
+                    color: '#a0a0ff',
+                    marginLeft: '15px',
+                    fontWeight: 300,
+                    opacity: 0.7
+                  }}>
+                    发现 {filteredPhotos.length} 个数据节点
+                  </span>
+                </h2>
+              </div>
 
-      {/* 底部 */}
-      <footer className="glass-card" style={{
-        marginTop: '60px',
-        padding: '30px 20px',
-        textAlign: 'center',
-        color: '#a0a0ff',
-        fontSize: '0.9rem',
-        opacity: 0.8,
-        borderRadius: '20px 20px 0 0'
-      }}>
-        <div style={{
-          maxWidth: '1400px',
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '15px'
-        }}>          
-          <p style={{ margin: 0, maxWidth: '600px', lineHeight: 1.6 }}>
-            Powered By _061837@bupt • ©2025 • All Rights Reserved 
-            <Footer />
-          </p>
-          
+              <Gallery photos={filteredPhotos} />
+            </>
+          )}
+        </main>
+
+        {/* 底部 */}
+        <footer className="glass-card" style={{
+          margin: '60px 40px 0 40px',
+          padding: '30px 40px',
+          textAlign: 'center',
+          color: '#a0a0ff',
+          fontSize: '0.9rem',
+          opacity: 0.8,
+          borderRadius: '20px 20px 0 0'
+        }}>
           <div style={{
             display: 'flex',
-            gap: '15px',
-            marginTop: '10px'
-          }}>
-            {['量子存储', '全息投影', 'AI分析', '云端同步'].map((tech, index) => (
-              <div key={index} style={{
-                padding: '4px 12px',
-                background: 'rgba(0, 242, 255, 0.1)',
-                borderRadius: '12px',
-                fontSize: '0.8rem',
-                color: '#00f2ff',
-                border: '1px solid rgba(0, 242, 255, 0.2)'
-              }}>
-                {tech}
-              </div>
-            ))}
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '20px'
+          }}>          
+            <p style={{ margin: 0, maxWidth: '600px', lineHeight: 1.6 }}>
+              Powered By _061837@bupt • ©2025 • All Rights Reserved 
+            </p>
+            
+            <a 
+              href="https://github.com/sapchen/personal-album" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="github-link"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: '#a0a0ff',
+                textDecoration: 'none',
+                fontSize: '0.9rem',
+                padding: '8px 20px',
+                borderRadius: '20px',
+                background: 'rgba(20, 25, 50, 0.4)',
+                border: '1px solid rgba(100, 150, 255, 0.3)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'rgba(0, 242, 255, 0.2)';
+                e.target.style.boxShadow = '0 0 15px rgba(0, 242, 255, 0.3)';
+                e.target.style.color = '#00f2ff';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'rgba(20, 25, 50, 0.4)';
+                e.target.style.boxShadow = 'none';
+                e.target.style.color = '#a0a0ff';
+              }}
+            >
+              <svg height="16" width="16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+              GitHub 仓库
+            </a>
+            
+            <div style={{
+              display: 'flex',
+              gap: '15px',
+              marginTop: '10px',
+              flexWrap: 'wrap',
+              justifyContent: 'center'
+            }}>
+              {['量子存储', '全息投影', 'AI分析', '云端同步'].map((tech, index) => (
+                <div key={index} style={{
+                  padding: '6px 15px',
+                  background: 'rgba(0, 242, 255, 0.1)',
+                  borderRadius: '12px',
+                  fontSize: '0.8rem',
+                  color: '#00f2ff',
+                  border: '1px solid rgba(0, 242, 255, 0.2)'
+                }}>
+                  {tech}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
-  )
-}
-
-// 在 App 组件的 return 语句之前（export default App 之前）添加 Footer 组件：
-const Footer = () => {
-  return (
-    <div style={{ marginTop: '10px' }}>
-      <a 
-        href="https://github.com/sapchen/personal-album" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="github-link"
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          color: '#a0a0ff',
-          textDecoration: 'none',
-          fontSize: '0.85rem',
-          padding: '6px 15px',
-          borderRadius: '20px',
-          background: 'rgba(0, 242, 255, 0.1)',
-          border: '1px solid rgba(0, 242, 255, 0.2)',
-          transition: 'all 0.3s ease',
-          marginTop: '10px'
-        }}
-        onMouseEnter={(e) => {
-          e.target.style.background = 'rgba(0, 242, 255, 0.2)';
-          e.target.style.boxShadow = '0 0 15px rgba(0, 242, 255, 0.3)';
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.background = 'rgba(0, 242, 255, 0.1)';
-          e.target.style.boxShadow = 'none';
-        }}
-      >
-        <svg 
-          height="16" 
-          width="16" 
-          viewBox="0 0 16 16" 
-          fill="currentColor"
-          style={{ verticalAlign: 'middle' }}
-        >
-          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-        </svg>
-        Github 源码
-      </a>
+        </footer>
+      </div>
     </div>
   )
 }
