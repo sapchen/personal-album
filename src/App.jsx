@@ -8,8 +8,12 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [sidebarExpanded, setSidebarExpanded] = useState(false)
 
+  // 添加窗口宽度状态
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+
   useEffect(() => {
-    fetch('./data.json')
+      fetch('./data.json')
       .then(res => res.json())
       .then(data => {
         setPhotos(data.photos)
@@ -26,7 +30,23 @@ function App() {
         ])
         setLoading(false)
       })
-  }, [])
+    
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+      // 在移动端自动收起侧边栏
+      if (window.innerWidth <= 768) {
+        setSidebarExpanded(false)
+      }
+    }
+    
+    window.addEventListener('resize', handleResize)
+    // 初始调用一次
+    handleResize()
+    
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+    }, [])
 
   const categories = [
     { id: 'all', name: '全部维度', icon: '🌌', color: '#00f2ff' },
@@ -74,7 +94,8 @@ function App() {
           border: '1px solid rgba(100, 150, 255, 0.2)',
           boxShadow: '0 15px 40px rgba(0, 0, 30, 0.5)',  // 缩小阴影
           backdropFilter: 'blur(10px)',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          display: windowWidth > 768 ? 'flex' : 'none'  // 关键修改：移动端隐藏
         }}
         onMouseEnter={() => setSidebarExpanded(true)}
         onMouseLeave={() => setSidebarExpanded(false)}
@@ -170,6 +191,65 @@ function App() {
           ))}
         </div>
 
+        {/* 2. 移动端底部导航栏 - 只在宽度≤768px时显示 */}
+        <div className="mobile-nav" style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          background: 'rgba(20, 25, 50, 0.95)',
+          backdropFilter: 'blur(12px)',
+          borderTop: '1px solid rgba(100, 150, 255, 0.2)',
+          display: 'flex',
+          justifyContent: 'space-around',
+          padding: '12px 0',
+          zIndex: 100,
+          display: windowWidth <= 768 ? 'flex' : 'none'  // 关键修改：桌面端隐藏
+        }}>
+          {/* 移动端导航按钮 */}
+          {categories.slice(0, 3).map(category => (  // 只显示前3个分类
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '4px',
+                background: 'transparent',
+                border: 'none',
+                color: activeCategory === category.id ? category.color : '#a0a0ff',
+                fontSize: '0.7rem',
+                cursor: 'pointer'
+              }}
+            >
+              <span style={{ fontSize: '1.2rem' }}>{category.icon}</span>
+              <span>{category.name}</span>
+            </button>
+          ))}
+          
+          {/* 统计按钮（替代侧边栏的统计信息） */}
+          <button
+            onClick={() => {
+              // 可以在这里显示移动端的统计弹窗
+              alert(`数据统计：\n照片总数：${photos.length}\n显示数量：${filteredPhotos.length}`);
+            }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px',
+              background: 'transparent',
+              border: 'none',
+              color: '#a0a0ff',
+              fontSize: '0.7rem',
+              cursor: 'pointer'
+            }}
+          >
+            <span style={{ fontSize: '1.2rem' }}>📊</span>
+            <span>统计</span>
+          </button>
+        </div>
         {/* 分类导航 */}
         {sidebarExpanded && (
           <div style={{
@@ -265,24 +345,33 @@ function App() {
       {/* 主内容区域 */}
       <div style={{ 
         flex: 1,
-        marginLeft: sidebarExpanded ? '240px' : '80px', // 根据侧边栏状态调整边距
+        marginLeft: windowWidth > 768 
+          ? (sidebarExpanded ? '240px' : '80px')  // 桌面端：根据侧边栏状态
+          : '0',  // 移动端：无左边距（侧边栏已隐藏）
+
+        // 添加底部边距，为移动端导航栏留出空间
+        marginBottom: windowWidth <= 768 ? '60px' : '0',
+
         transition: 'margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         minHeight: '100vh'
       }}>
         <header className="glass-card" style={{
-          padding: '25px 40px',
-          margin: '20px 40px 40px 40px',
+          padding: windowWidth > 768 ? '25px 40px' : '15px 20px',
+          margin: windowWidth > 768 ? '20px 40px 40px 40px' : '15px 15px 30px 15px',
           borderRadius: '20px',
           position: 'relative'
         }}>
           <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
+            // 改变布局方向：桌面端横向，移动端纵向
+            flexDirection: windowWidth > 768 ? 'row' : 'column',
+            // 对齐方式
+            alignItems: windowWidth > 768 ? 'center' : 'flex-start',
+            // 间距
+            gap: windowWidth > 768 ? '0' : '15px'
           }}>
             <div>
               <h1 style={{
-                fontSize: '2.5rem',
+                fontSize: windowWidth > 768 ? '2.5rem' : '1.8rem',
                 fontWeight: 300,
                 margin: '0 0 10px 0',
                 letterSpacing: '0.1em'
@@ -297,19 +386,21 @@ function App() {
               <p style={{
                 margin: 0,
                 color: '#a0a0ff',
-                fontSize: '1rem',
+                fontSize: windowWidth > 768 ? '1rem' : '0.9rem',  // 移动端字体小一点
                 opacity: 0.7,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '10px'
+                gap: '10px',
+                flexWrap: windowWidth > 768 ? 'nowrap' : 'wrap'  // 移动端允许换行
               }}>
                 <span>📂 当前分类: </span>
                 <span style={{
-                  padding: '4px 12px',
+                  padding: windowWidth > 768 ? '4px 12px' : '3px 8px',  // 移动端内边距小一点
                   background: 'rgba(0, 242, 255, 0.1)',
                   borderRadius: '12px',
                   border: '1px solid rgba(0, 242, 255, 0.3)',
-                  color: '#00f2ff'
+                  color: '#00f2ff',
+                  fontSize: windowWidth > 768 ? '1rem' : '0.9rem'  // 移动端字体小一点
                 }}>
                   {categories.find(c => c.id === activeCategory)?.name || '全部维度'}
                 </span>
@@ -341,6 +432,7 @@ function App() {
               
               {/* 提示文字 */}
               <div style={{
+                display: windowWidth > 768 ? 'flex' : 'none',  // 移动端隐藏
                 fontSize: '0.85rem',  // 改为0.85rem
                 color: '#a0a0ff',
                 opacity: 0.6,

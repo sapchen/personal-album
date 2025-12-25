@@ -184,3 +184,34 @@ body::after {
     transform: translateY(0);
   }
 }
+
+/* 移动端响应式样式 */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  /* 隐藏背景网格和光晕以提升性能 */
+  body::before,
+  body::after {
+    display: none;
+  }
+  
+  /* 调整卡片玻璃效果 */
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  /* 调整加载动画大小 */
+  .loading-dots {
+    transform: scale(0.7);
+  }
+}
+
+/* 小屏幕手机 */
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+}
