@@ -29,7 +29,7 @@ function App() {
   }, [])
 
   const categories = [
-    { id: '全部纬度', name: '全部维度', icon: '🌌', color: '#00f2ff' },
+    { id: 'all', name: '全部维度', icon: '🌌', color: '#00f2ff' },
     { id: '未来视界', name: '未来视界', icon: '🚀', color: '#00ff88' },
     { id: '科技矩阵', name: '科技矩阵', icon: '💻', color: '#9d00ff' },
     { id: '赛博空间', name: '赛博空间', icon: '🔮', color: '#ff0088'  },
