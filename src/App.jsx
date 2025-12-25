@@ -17,19 +17,19 @@ function App() {
       })
       .catch(() => {
         setPhotos([
-          { id: 1, url: 'photos/01.jpg', title: '数字黎明', date: '2023-05-15', category: 'future' },
-          { id: 2, url: 'photos/02.jpg', title: '矩阵光影', date: '2023-08-20', category: 'tech' },
-          { id: 3, url: 'photos/03.jpg', title: '量子之夜', date: '2024-01-01', category: 'cyber' },
-          { id: 4, url: 'photos/04.jpg', title: '灿烂篝火', date: '2024-02-20', category: 'future' },
-          { id: 5, url: 'photos/05.jpg', title: '快乐老家', date: '2024-11-08', category: 'tech' },
-          { id: 6, url: 'photos/06.jpg', title: '你好未来', date: '2025-12-24', category: 'cyber' }
+          { id: 1, url: 'photos/01.jpg', title: '数字黎明', date: '2023-05-15', category: '未来视界' },
+          { id: 2, url: 'photos/02.jpg', title: '矩阵光影', date: '2023-08-20', category: '科技矩阵' },
+          { id: 3, url: 'photos/03.jpg', title: '量子之夜', date: '2024-01-01', category: '赛博空间' },
+          { id: 4, url: 'photos/04.jpg', title: '灿烂篝火', date: '2024-02-20', category: '未来视界' },
+          { id: 5, url: 'photos/05.jpg', title: '快乐老家', date: '2024-11-08', category: '科技矩阵' },
+          { id: 6, url: 'photos/06.jpg', title: '你好未来', date: '2025-12-24', category: '赛博空间' }
         ])
         setLoading(false)
       })
   }, [])
 
   const categories = [
-    { id: 'all', name: '全部维度', icon: '🌌', color: '#00f2ff' },
+    { id: '全部纬度', name: '全部维度', icon: '🌌', color: '#00f2ff' },
     { id: '未来视界', name: '未来视界', icon: '🚀', color: '#00ff88' },
     { id: '科技矩阵', name: '科技矩阵', icon: '💻', color: '#9d00ff' },
     { id: '赛博空间', name: '赛博空间', icon: '🔮', color: '#ff0088'  },
