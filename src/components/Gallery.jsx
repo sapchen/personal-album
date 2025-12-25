@@ -172,78 +172,78 @@ const Gallery = ({ photos }) => {
         </div>
 
         {/* 照片信息 */}
-        <div className="glass-card" style={{
-          position: 'absolute',
-          bottom: '40px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          padding: '25px',
-          borderRadius: '15px',
-          maxWidth: '600px',
-          width: '90%',
-          textAlign: 'center',
-          border: '1px solid rgba(100, 150, 255, 0.2)'
+<div className="glass-card" style={{
+  position: 'absolute',
+  bottom: '40px',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  padding: '8.75px', // 25px * 0.35
+  borderRadius: '15px',
+  maxWidth: '210px', // 600px * 0.35
+  width: '31.5%', // 90% * 0.35
+  textAlign: 'center',
+  border: '1px solid rgba(100, 150, 255, 0.2)'
+}}>
+  <div style={{
+    fontSize: '0.49rem', // 1.4rem * 0.35
+    fontWeight: 400,
+    marginBottom: '4.2px', // 12px * 0.35
+    color: '#e0e0ff',
+    letterSpacing: '0.05em'
+  }}>
+    {photo.title}
+  </div>
+  
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '8.75px', // 25px * 0.35
+    fontSize: '0.315rem', // 0.9rem * 0.35
+    color: '#a0a0ff',
+    marginBottom: '5.25px', // 15px * 0.35
+    flexWrap: 'wrap'
+  }}>
+    {photo.date && (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '2.1px' }}> {/* 6px * 0.35 */}
+        <span style={{ opacity: 0.6 }}>📅</span>
+        <span className="digital-font">{photo.date}</span>
+      </div>
+    )}
+    {photo.category && (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '2.1px' }}> {/* 6px * 0.35 */}
+        <span style={{ opacity: 0.6 }}>🏷️</span>
+        <span style={{
+          padding: '0.7px 3.5px', // 2px * 0.35, 10px * 0.35
+          background: 'rgba(0, 242, 255, 0.1)',
+          borderRadius: '4.2px', // 12px * 0.35
+          border: '1px solid rgba(0, 242, 255, 0.3)'
         }}>
-          <div style={{
-            fontSize: '1.4rem',
-            fontWeight: 400,
-            marginBottom: '12px',
-            color: '#e0e0ff',
-            letterSpacing: '0.05em'
-          }}>
-            {photo.title}
-          </div>
-          
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '25px',
-            fontSize: '0.9rem',
-            color: '#a0a0ff',
-            marginBottom: '15px',
-            flexWrap: 'wrap'
-          }}>
-            {photo.date && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ opacity: 0.6 }}>📅</span>
-                <span className="digital-font">{photo.date}</span>
-              </div>
-            )}
-            {photo.category && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ opacity: 0.6 }}>🏷️</span>
-                <span style={{
-                  padding: '2px 10px',
-                  background: 'rgba(0, 242, 255, 0.1)',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(0, 242, 255, 0.3)'
-                }}>
-                  {photo.category}
-                </span>
-              </div>
-            )}
-          </div>
-          
-          <div style={{
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '20px',
-            marginTop: '20px'
-          }}>
-            <div className="digital-font" style={{ 
-              fontSize: '1rem',
-              color: '#00f2ff',
-              background: 'rgba(0, 242, 255, 0.1)',
-              padding: '8px 20px',
-              borderRadius: '20px',
-              border: '1px solid rgba(0, 242, 255, 0.3)'
-            }}>
-              {selectedIndex + 1} / {photos.length}
-            </div>
-          </div>
-        </div>
+          {photo.category}
+        </span>
+      </div>
+    )}
+  </div>
+  
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '7px', // 20px * 0.35
+    marginTop: '7px' // 20px * 0.35
+  }}>
+    <div className="digital-font" style={{ 
+      fontSize: '0.35rem', // 1rem * 0.35
+      color: '#00f2ff',
+      background: 'rgba(0, 242, 255, 0.1)',
+      padding: '2.8px 7px', // 8px * 0.35, 20px * 0.35
+      borderRadius: '7px', // 20px * 0.35
+      border: '1px solid rgba(0, 242, 255, 0.3)'
+    }}>
+      {selectedIndex + 1} / {photos.length}
+    </div>
+  </div>
+</div>
 
         {/* 导航按钮 */}
         {photos.length > 1 && (
