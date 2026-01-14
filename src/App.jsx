@@ -515,10 +515,7 @@ function App() {
             alignItems: 'center',
             gap: '20px'
           }}>          
-            <p style={{ margin: 0, maxWidth: '600px', lineHeight: 1.6 }}>
-              Powered By 宸良手纪 • ©2026 • All Rights Reserved 
-            </p>
-
+            <p>Powered By 宸良手纪 • ©2026 • All Rights Reserved</p>
             {/* ======== 新增备案信息 ======== */}
             <div className="icp" style={{
               marginTop: '1rem',
@@ -542,8 +539,7 @@ function App() {
                 onMouseLeave={(e) => e.target.style.color = '#7a8599'}
               >
                 闽ICP备2026000687号-1
-              </a>
-              
+              </a>              
               <a 
                 href="https://beian.mps.gov.cn/#/query/webSearch?code=35010202002051" 
                 target="_blank"
