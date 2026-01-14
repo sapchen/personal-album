@@ -1,15 +1,16 @@
 # Cosmo Fu 的相册长廊
 
-简洁的照片作品展示web应用，自动部署到 GitHub Pages。
+简洁的照片作品展示web应用。
 
 ## 使用
 
 1. 将照片放入 `public/photos/`
 2. 更新 `public/data.json`
-3. 推送到 GitHub
+3. 安装依赖：npm install
+4. 构建：npm run build
 
 ## 访问
-https://sapchen.github.io/personal-album
+https://sapchen.cn/personal-album
 
 ## 许可协议
 CC BY-SA 4.0

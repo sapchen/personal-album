@@ -1,3 +1,6 @@
+/* 科技感字体优化 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 /* 科技感主题 */
 body {
   margin: 0;
@@ -55,9 +58,6 @@ body::after {
     transform: translate(-50%, -50%) scale(1.1);
   }
 }
-
-/* 科技感字体优化 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 /* 卡片玻璃态效果 */
 .glass-card {

@@ -88,7 +88,6 @@ function App() {
           padding: sidebarExpanded ? '20px' : '15px 10px',  // 缩小内边距
           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           zIndex: 100,
-          display: 'flex',
           flexDirection: 'column',
           gap: '20px',  // 缩小间距
           border: '1px solid rgba(100, 150, 255, 0.2)',
@@ -200,7 +199,6 @@ function App() {
           background: 'rgba(20, 25, 50, 0.95)',
           backdropFilter: 'blur(12px)',
           borderTop: '1px solid rgba(100, 150, 255, 0.2)',
-          display: 'flex',
           justifyContent: 'space-around',
           padding: '12px 0',
           zIndex: 100,
@@ -212,7 +210,6 @@ function App() {
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
               style={{
-                display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '4px',
@@ -280,7 +277,6 @@ function App() {
                   onClick={() => setActiveCategory(category.id)}
                   style={{
                     padding: '10px 12px',  // 缩小内边距
-                    border: 'none',
                     borderRadius: '8px',  // 缩小圆角
                     background: activeCategory === category.id 
                       ? `linear-gradient(135deg, ${category.color}20, ${category.color}10)` 
@@ -380,7 +376,7 @@ function App() {
                   fontFamily: "'Courier New', monospace",
                   fontWeight: 600
                 }}>
-                  DIGITAL ARCHIVE
+                  CosmoFu的相册长廊
                 </span>
               </h1>
               <p style={{
@@ -520,64 +516,64 @@ function App() {
             gap: '20px'
           }}>          
             <p style={{ margin: 0, maxWidth: '600px', lineHeight: 1.6 }}>
-              Powered By _061837@bupt • ©2025 • All Rights Reserved 
+              Powered By 宸良手纪 • ©2026 • All Rights Reserved 
             </p>
-            
-            <a 
-              href="https://github.com/sapchen/personal-album" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="github-link"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                color: '#a0a0ff',
-                textDecoration: 'none',
-                fontSize: '0.9rem',
-                padding: '8px 20px',
-                borderRadius: '20px',
-                background: 'rgba(20, 25, 50, 0.4)',
-                border: '1px solid rgba(100, 150, 255, 0.3)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.background = 'rgba(0, 242, 255, 0.2)';
-                e.target.style.boxShadow = '0 0 15px rgba(0, 242, 255, 0.3)';
-                e.target.style.color = '#00f2ff';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.background = 'rgba(20, 25, 50, 0.4)';
-                e.target.style.boxShadow = 'none';
-                e.target.style.color = '#a0a0ff';
-              }}
-            >
-              <svg height="16" width="16" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-              </svg>
-              GitHub 仓库
-            </a>
-            
-            <div style={{
+
+            {/* ======== 新增备案信息 ======== */}
+            <div className="icp" style={{
+              marginTop: '1rem',
               display: 'flex',
-              gap: '15px',
-              marginTop: '10px',
-              flexWrap: 'wrap',
-              justifyContent: 'center'
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              color: '#7a8599'
             }}>
-              {['量子存储', '全息投影', 'AI分析', '云端同步'].map((tech, index) => (
-                <div key={index} style={{
-                  padding: '6px 15px',
-                  background: 'rgba(0, 242, 255, 0.1)',
-                  borderRadius: '12px',
+              <a 
+                href="https://beian.miit.gov.cn/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#7a8599',
+                  textDecoration: 'none',
+                  transition: 'color 0.3s ease',
+                  fontSize: '0.8rem'
+                }}
+                onMouseEnter={(e) => e.target.style.color = '#29c4ff'}
+                onMouseLeave={(e) => e.target.style.color = '#7a8599'}
+              >
+                闽ICP备2026000687号-1
+              </a>
+              
+              <a 
+                href="https://beian.mps.gov.cn/#/query/webSearch?code=35010202002051" 
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  color: '#7a8599',
+                  textDecoration: 'none',
+                  transition: 'color 0.3s ease',
                   fontSize: '0.8rem',
-                  color: '#00f2ff',
-                  border: '1px solid rgba(0, 242, 255, 0.2)'
-                }}>
-                  {tech}
-                </div>
-              ))}
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+                onMouseEnter={(e) => e.target.style.color = '#29c4ff'}
+                onMouseLeave={(e) => e.target.style.color = '#7a8599'}
+              >
+                <img 
+                  src="备案图标.png" 
+                  alt="公安备案图标" 
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    verticalAlign: 'middle',
+                    objectFit: 'contain'
+                  }}
+                />
+                闽公网安备35010202002051号
+              </a>
             </div>
+
           </div>
         </footer>
       </div>
