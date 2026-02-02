@@ -10,7 +10,9 @@ function App() {
 
   // 添加窗口宽度状态
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
+  const particlesInit = async (engine) => {
+    await loadSlim(engine);
+  };
 
   useEffect(() => {
       fetch('./data.json')
@@ -69,7 +71,7 @@ function App() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(180deg, #0a0a0f 0%, #101020 100%)',
+      background: 'transparent',
       position: 'relative',
       display: 'flex'
     }}>
@@ -349,9 +351,11 @@ function App() {
         marginBottom: windowWidth <= 768 ? '60px' : '0',
 
         transition: 'margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-        minHeight: '100vh'
+        minHeight: '100vh',
+        position: 'relative', // 添加相对定位
+        zIndex: 1 // 添加z-index
       }}>
-        <header className="glass-card" style={{
+        <header style={{
           padding: windowWidth > 768 ? '25px 40px' : '15px 20px',
           margin: windowWidth > 768 ? '20px 40px 40px 40px' : '15px 15px 30px 15px',
           borderRadius: '20px',
@@ -390,55 +394,10 @@ function App() {
                 flexWrap: windowWidth > 768 ? 'nowrap' : 'wrap'  // 移动端允许换行
               }}>
                 <span>📂 当前分类: </span>
-                <span style={{
-                  padding: windowWidth > 768 ? '4px 12px' : '3px 8px',  // 移动端内边距小一点
-                  background: 'rgba(0, 242, 255, 0.1)',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(0, 242, 255, 0.3)',
-                  color: '#00f2ff',
-                  fontSize: windowWidth > 768 ? '1rem' : '0.9rem'  // 移动端字体小一点
-                }}>
+                <span>
                   {categories.find(c => c.id === activeCategory)?.name || '全部维度'}
                 </span>
               </p>
-            </div>
-            
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '20px'
-            }}>
-              <div style={{
-                color: '#a0a0ff',
-                fontSize: '0.9rem',
-                opacity: 0.7,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
-                <div style={{
-                  width: '8px',
-                  height: '8px',
-                  background: '#00ff88',
-                  borderRadius: '50%',
-                  animation: 'pulse 2s infinite'
-                }} />
-                <span className="digital-font">LIVE</span>
-              </div>
-              
-              {/* 提示文字 */}
-              <div style={{
-                display: windowWidth > 768 ? 'flex' : 'none',  // 移动端隐藏
-                fontSize: '0.85rem',  // 改为0.85rem
-                color: '#a0a0ff',
-                opacity: 0.6,
-                padding: '6px 12px',  // 缩小内边距
-                background: 'rgba(20, 25, 50, 0.4)',
-                borderRadius: '8px',  // 缩小圆角
-                border: '1px solid rgba(100, 150, 255, 0.1)'
-              }}>
-                悬停左侧展开控制面板
-              </div>
             </div>
           </div>
         </header>
@@ -500,7 +459,7 @@ function App() {
         </main>
 
         {/* 底部 */}
-        <footer className="glass-card" style={{
+        <footer style={{
           margin: '60px 40px 0 40px',
           padding: '30px 40px',
           textAlign: 'center',

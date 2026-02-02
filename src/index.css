@@ -12,7 +12,7 @@ body {
   position: relative;
 }
 
-/* 背景科技网格 */
+ /* 背景科技网格 */
 body::before {
   content: '';
   position: fixed;
@@ -24,7 +24,7 @@ body::before {
     linear-gradient(rgba(10, 15, 30, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(10, 15, 30, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
-  z-index: -1;
+  z-index: -2;
   animation: gridMove 20s linear infinite;
 }
 
@@ -38,10 +38,10 @@ body::after {
   height: 800px;
   background: radial-gradient(circle, rgba(0, 100, 255, 0.1) 0%, transparent 70%);
   transform: translate(-50%, -50%);
-  z-index: -1;
+  z-index: -2;
   filter: blur(60px);
   animation: pulse 8s ease-in-out infinite;
-}
+} 
 
 @keyframes gridMove {
   0% { background-position: 0 0; }
