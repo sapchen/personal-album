@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import Gallery from './components/Gallery'
 import './index.css'
+import Particles from 'react-tsparticles'
+import { loadSlim } from 'tsparticles-slim'
+
 
 function App() {
   const [photos, setPhotos] = useState([])
@@ -8,6 +11,16 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [sidebarExpanded, setSidebarExpanded] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  // 粒子初始化
+  const particlesInit = async (engine) => {
+    await loadSlim(engine)
+  }
+
+  const particlesLoaded = async (container) => {
+    console.log('粒子加载完成', container)
+  }
+
 
   useEffect(() => {
     fetch('./data.json')
@@ -64,6 +77,143 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* 添加粒子背景 */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        className="particles-background"
+        options={{
+          background: {
+            color: {
+              value: "transparent",
+            },
+          },
+          fullScreen: {
+            enable: false,
+            zIndex: -1
+          },
+          fpsLimit: 120,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "grab",
+              },
+              resize: true,
+            },
+            modes: {
+              push: {
+                quantity: 4,
+              },
+              grab: {
+                distance: 200,
+                links: {
+                  opacity: 0.5
+                }
+              },
+              bubble: {
+                distance: 400,
+                size: 40,
+                duration: 2,
+                opacity: 0.8,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: ["#e8e8e8", "#f0f0f0", "#f8f8f8", "#ffffff", "#f5f5f5"]
+            },
+            links: {
+              color: "#d0d0d0",
+              distance: 150,
+              enable: true,
+              opacity: 0.5,
+              width: 1,
+              blink: true,
+              consent: true,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: true,
+              speed: 0.75,
+              straight: false,
+              attract: {
+                enable: true,
+                rotateX: 600,
+                rotateY: 1200
+              }
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 1000,
+              },
+              value: 60,
+            },
+            opacity: {
+              value: 0.35,
+              random: true,
+              anim: {
+                enable: true,
+                speed: 1,
+                opacity_min: 0.1,
+                sync: false
+              }
+            },
+            shape: {
+              type: "circle",
+              stroke: {
+                width: 0,
+                color: "#000000"
+              },
+            },
+            size: {
+              value: { min: 1, max: 4 },
+              random: true,
+              anim: {
+                enable: true,
+                speed: 4,
+                size_min: 0.3,
+                sync: false
+              }
+            },
+          },
+          detectRetina: true,
+          themes: [
+            {
+              name: "light",
+              default: {
+                value: true,
+                mode: "light"
+              },
+              options: {
+                background: {
+                  color: "transparent"
+                },
+                particles: {
+                  color: {
+                    value: ["#00f2ff", "#00ff88", "#9d00ff"]
+                  }
+                }
+              }
+            }
+          ]
+        }}
+      />
+
+
       {/* 桌面端侧边栏 */}
       <div 
         className={`floating-sidebar glass-card ${sidebarExpanded ? 'expanded' : 'collapsed'}`}
