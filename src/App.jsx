@@ -147,7 +147,7 @@ function App() {
                 default: "bounce",
               },
               random: true,
-              speed: 0.75,
+              speed: 0.5,
               straight: false,
               attract: {
                 enable: true,
