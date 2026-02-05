@@ -1,7 +1,13 @@
-/* 科技感字体优化 */
+/* 字体导入 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-/* 科技感主题 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 全局样式 */
 body {
   margin: 0;
   background: #0a0a0f;
@@ -23,7 +29,7 @@ body::before {
   background-image: 
     linear-gradient(rgba(100, 150, 255, 0.15) 1px, transparent 1px),
     linear-gradient(90deg, rgba(100, 150, 255, 0.15) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background-size: 35px 35px;
   z-index: -1;
   animation: gridMove 20s linear infinite;
 }
@@ -46,6 +52,18 @@ body::after {
   animation: pulse 8s ease-in-out infinite;
 }
 
+/* 三维粒子背景 */
+.particles-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: transparent;
+}
+
+/* 动画定义 */
 @keyframes gridMove {
   0% { background-position: 0 0; }
   100% { background-position: 50px 50px; }
@@ -62,18 +80,18 @@ body::after {
   }
 }
 
-/* 三维粒子背景效果 */
-.particles-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  background: transparent;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* 卡片玻璃态效果 */
+/* 通用组件样式 */
 .glass-card {
   background: transparent;
   backdrop-filter: blur(0px);
@@ -84,12 +102,29 @@ body::after {
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* 文字渐变效果 */
 .gradient-text {
-  background: linear-gradient(90deg, #00f2ff, #0055ff, #9d00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a0d2ff;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #a0d2ff;
+  background-clip: unset;
+}
+
+.hover-glow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 
+    0 0 30px rgba(0, 242, 255, 0.3),
+    0 0 60px rgba(0, 85, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.digital-font {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 /* 加载动画 */
@@ -145,68 +180,130 @@ body::after {
   100% { transform: translate(24px, 0); }
 }
 
-/* 悬停发光效果 */
-.hover-glow {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hover-glow:hover {
-  box-shadow: 
-    0 0 30px rgba(0, 242, 255, 0.3),
-    0 0 60px rgba(0, 85, 255, 0.2);
-  transform: translateY(-5px);
-}
-
-/* 数字字体 */
-.digital-font {
-  font-family: 'Courier New', monospace;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-/* GitHub链接样式 */
-.github-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #a0a0ff;
-  text-decoration: none;
-  font-size: 0.85rem;
-  padding: 6px 15px;
-  border-radius: 20px;
-  background: rgba(0, 242, 255, 0.1);
-  border: 1px solid rgba(0, 242, 255, 0.2);
-  transition: all 0.3s ease;
-  margin-top: 10px;
-}
-
-.github-link:hover {
-  background: rgba(0, 242, 255, 0.2);
-  box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
-  transform: translateY(-2px);
-  color: #00f2ff;
-}
-
-/* 添加缺失的动画 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ========== 新增App组件样式 ========== */
-
 /* 布局容器 */
 .app-container {
   min-height: 100vh;
   background: transparent;
   position: relative;
   display: flex;
+}
+
+/* 主内容区域 */
+.main-content {
+  flex: 1;
+  transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.main-content.desktop-expanded {
+  margin-left: 240px;
+}
+
+.main-content.desktop-collapsed {
+  margin-left: 80px;
+}
+
+.main-content.mobile {
+  margin-left: 0;
+  margin-bottom: 60px;
+}
+
+/* 头部区域 */
+.app-header {
+  border-radius: 20px;
+  position: relative;
+  margin: 20px 40px 40px 40px;
+  padding: 25px 40px;
+}
+
+.app-header.mobile {
+  margin: 15px 15px 30px 15px;
+  padding: 15px 20px;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.header-row.mobile {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.1em;
+}
+
+.app-title.mobile {
+  font-size: 1.8rem;
+}
+
+/* 主要内容区域 */
+.app-main {
+  padding: 0 40px 40px;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #a0d2ff;
+  margin: 0;
+  font-weight: 400;
+}
+
+.photo-count {
+  font-size: 1rem;
+  color: #a0a0ff;
+  margin-left: 15px;
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+.category-info {
+  margin: 0;
+  color: #a0a0ff;
+  font-size: 1rem;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.category-info.mobile {
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: #a0a0ff;
+}
+
+.loading-text {
+  margin-top: 30px;
+  font-size: 1.1rem;
 }
 
 /* 左侧悬浮侧边栏 */
@@ -239,7 +336,7 @@ body::after {
   padding: 15px 10px;
 }
 
-/* 侧边栏指示器 */
+/* 侧边栏内容 */
 .sidebar-indicator {
   display: flex;
   align-items: center;
@@ -308,8 +405,8 @@ body::after {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--stat-color), transparent);
+  width: 2px;
+  background: rgba(150, 180, 255, 0.3); /* 统一的浅蓝色灰 */
 }
 
 /* 分类导航 */
@@ -355,11 +452,14 @@ body::after {
 .category-button.active {
   background: linear-gradient(
     135deg, 
-    var(--category-color-40, rgba(0, 242, 255, 0.4)) 20%, 
-    var(--category-color-20, rgba(0, 242, 255, 0.2)) 100%
+    rgba(230, 230, 230, 0.2) 0%, 
+    rgba(200, 200, 200, 0.1) 100%
   );
-  color: var(--category-color, #00f2ff);
-  border-color: var(--category-color, #00f2ff) 40;
+  color: #ffffff;
+  border-color: rgba(240, 240, 240, 0.4);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .category-button:hover:not(.active) {
@@ -380,8 +480,8 @@ body::after {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--category-color, #00f2ff);
-  box-shadow: 0 0 10px var(--category-color, #00f2ff);
+  background: rgba(240, 240, 240, 0.9);
+  box-shadow: 0 0 10px rgba(240, 240, 240, 0.5);
 }
 
 /* 移动端导航栏 */
@@ -390,9 +490,10 @@ body::after {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(20, 25, 50, 0.95);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(100, 150, 255, 0.2);
+  background: rgba(15, 20, 40, 0.98); /* 深色背景 */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(100, 150, 255, 0.15); /* 更淡的蓝色边框 */
   display: flex;
   justify-content: space-around;
   padding: 12px 0;
@@ -413,134 +514,30 @@ body::after {
 }
 
 .mobile-nav-button.active {
-  color: var(--button-color, #00f2ff);
+  color: #ffffff;
+  position: relative;
+}
+
+/* 底部银色指示条 */
+.mobile-nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: rgba(240, 240, 240, 0.8);
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba(240, 240, 240, 0.4);
 }
 
 .mobile-nav-button:hover {
-  color: var(--button-color, #00f2ff);
+  color: #f0f0f0;
 }
 
 .mobile-nav-icon {
   font-size: 1.2rem;
-}
-
-/* 主内容区域 */
-.main-content {
-  flex: 1;
-  transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 100vh;
-  position: relative;
-  z-index: 1;
-}
-
-.main-content.desktop-expanded {
-  margin-left: 240px;
-}
-
-.main-content.desktop-collapsed {
-  margin-left: 80px;
-}
-
-.main-content.mobile {
-  margin-left: 0;
-  margin-bottom: 60px;
-}
-
-/* 头部区域 */
-.app-header {
-  border-radius: 20px;
-  position: relative;
-  margin: 20px 40px 40px 40px;
-  padding: 25px 40px;
-}
-
-.app-header.mobile {
-  margin: 15px 15px 30px 15px;
-  padding: 15px 20px;
-}
-
-.header-row {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-.header-row.mobile {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.app-title {
-  font-size: 2.5rem;
-  font-weight: 300;
-  margin: 0 0 10px 0;
-  letter-spacing: 0.1em;
-}
-
-.app-title.mobile {
-  font-size: 1.8rem;
-}
-
-.category-info {
-  margin: 0;
-  color: #a0a0ff;
-  font-size: 1rem;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: nowrap;
-}
-
-.category-info.mobile {
-  font-size: 0.9rem;
-  flex-wrap: wrap;
-}
-
-/* 主要内容 */
-.app-main {
-  padding: 0 40px 40px;
-  position: relative;
-}
-
-/* 加载状态 */
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 60vh;
-  color: #a0a0ff;
-}
-
-.loading-text {
-  margin-top: 30px;
-  font-size: 1.1rem;
-}
-
-/* 标题区域 */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  padding: 0 10px;
-}
-
-.section-title {
-  font-size: 1.5rem;
-  color: #e0e0ff;
-  margin: 0;
-  font-weight: 400;
-}
-
-.photo-count {
-  font-size: 1rem;
-  color: #a0a0ff;
-  margin-left: 15px;
-  font-weight: 300;
-  opacity: 0.7;
 }
 
 /* 页脚 */
@@ -595,19 +592,27 @@ body::after {
   object-fit: contain;
 }
 
-/* 移动端响应式样式 */
+/* 响应式设计 */
+@media (min-width: 769px) {
+  .mobile-nav {
+    display: none;
+  }
+  
+  .floating-sidebar {
+    display: flex;
+  }
+}
+
 @media (max-width: 768px) {
   body {
     font-size: 14px;
   }
   
-  /* 调整卡片玻璃效果 */
   .glass-card {
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
   }
   
-  /* 调整加载动画大小 */
   .loading-dots {
     transform: scale(0.7);
   }
@@ -617,18 +622,15 @@ body::after {
     gap: 10px;
   }
   
-  /* 隐藏桌面侧边栏 */
   .floating-sidebar {
     display: none;
   }
   
-  /* 显示移动端导航 */
   .mobile-nav {
     display: flex;
   }
 }
 
-/* 小屏幕手机 */
 @media (max-width: 480px) {
   body {
     font-size: 13px;
@@ -646,16 +648,5 @@ body::after {
   .app-footer {
     margin: 40px 15px 0 15px;
     padding: 20px 15px;
-  }
-}
-
-/* 桌面端响应式 */
-@media (min-width: 769px) {
-  .mobile-nav {
-    display: none;
-  }
-  
-  .floating-sidebar {
-    display: flex;
   }
 }

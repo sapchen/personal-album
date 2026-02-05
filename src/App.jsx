@@ -56,21 +56,21 @@ function App() {
     }
   }, [])
 
-  const categories = [
-    { id: 'all', name: '全部维度', icon: '🌌', color: '#00f2ff' },
-    { id: '未来视界', name: '未来视界', icon: '🚀', color: '#00ff88' },
-    { id: '科技矩阵', name: '科技矩阵', icon: '💻', color: '#9d00ff' },
-    { id: '赛博空间', name: '赛博空间', icon: '🔮', color: '#ff0088' },
+const categories = [
+    { id: 'all', name: '全部维度', icon: '●', color: '#00f2ff' },         // 圆点
+    { id: '未来视界', name: '未来视界', icon: '▲', color: '#00ff88' },    // 三角形
+    { id: '科技矩阵', name: '科技矩阵', icon: '■', color: '#9d00ff' },    // 方块
+    { id: '赛博空间', name: '赛博空间', icon: '◆', color: '#ff0088' },   // 菱形
   ]
 
   const filteredPhotos = activeCategory === 'all' 
     ? photos 
     : photos.filter(photo => photo.category === activeCategory)
 
-  const stats = [
-    { label: '数据节点', value: photos.length, icon: '💾', color: '#00f2ff' },
-    { label: '当前显示', value: filteredPhotos.length, icon: '👁️', color: '#00ff88' },
-    { label: '维度分类', value: categories.length - 1, icon: '🧬', color: '#9d00ff' }
+const stats = [
+    { label: '数据节点', value: photos.length, icon: '○', color: '#66ccff' },
+    { label: '当前显示', value: filteredPhotos.length, icon: '◎', color: '#88bbff' },
+    { label: '维度分类', value: categories.length - 1, icon: '▣', color: '#99aaff' }  // 带点的方块
   ]
 
   const isMobile = windowWidth <= 768
@@ -233,12 +233,6 @@ function App() {
               key={stat.label}
               className="stat-card"
               style={{ '--stat-color': stat.color }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = `rgba(${parseInt(stat.color.slice(1,3), 16)}, ${parseInt(stat.color.slice(3,5), 16)}, ${parseInt(stat.color.slice(5,7), 16)}, 0.2)`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(20, 25, 50, 0.4)';
-              }}
             >
               <div className="stat-card-content">
                 <div className="stat-icon" style={{ color: stat.color }}>
@@ -264,7 +258,6 @@ function App() {
         {sidebarExpanded && (
           <div className="category-section">
             <div className="category-title">
-              <span>📁</span>
               <span>维度分类</span>
             </div>
             
@@ -337,7 +330,7 @@ function App() {
                 </span>
               </h1>
               <p className={`category-info ${isMobile ? 'mobile' : ''}`}>
-                <span>📂 当前分类: </span>
+                <span> 当前分类: </span>
                 <span>
                   {categories.find(c => c.id === activeCategory)?.name || '全部维度'}
                 </span>

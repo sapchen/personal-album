@@ -331,13 +331,28 @@ const Gallery = ({ photos }) => {
             border: '1px solid rgba(100, 150, 255, 0.1)'
           }}
           onClick={() => setSelectedIndex(index)}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
+            e.currentTarget.style.boxShadow = `
+              0 25px 50px rgba(0, 0, 0, 0.3),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.1), /* 内发光 */
+              0 0 0 2px rgba(220, 220, 220, 0.7),       /* 银色边框 */
+              0 0 40px rgba(200, 200, 200, 0.5)         /* 外发光 */
+            `;
+            e.currentTarget.style.borderColor = 'rgba(220, 220, 220, 0.8)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = 'none';
+            e.currentTarget.style.borderColor = 'rgba(80, 80, 80, 0.3)';
+          }}
         >
           {/* 图片容器 */}
           <div style={{ 
             position: 'relative', 
             aspectRatio: '16/9', 
             overflow: 'hidden',
-            background: 'linear-gradient(135deg, rgba(0, 50, 100, 0.2), rgba(100, 0, 150, 0.2))'
+            background: 'linear-gradient(135deg, rgba(50, 50, 50, 0.3), rgba(30, 30, 30, 0.3))'
           }}>
             <img
               src={photo.url}
