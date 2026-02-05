@@ -290,30 +290,18 @@ const stats = [
 
       {/* 移动端导航栏 */}
       <div className="mobile-nav">
-        {/* 移动端分类按钮 */}
-        {categories.slice(0, 3).map(category => (
+        {/* 显示全部4个分类按钮 */}
+        {categories.map(category => (
           <button
             key={category.id}
             className={`mobile-nav-button ${activeCategory === category.id ? 'active' : ''}`}
             onClick={() => setActiveCategory(category.id)}
-            style={{ '--button-color': category.color }}
+            style={{ '--button-color': '#f0f0f0' }} 
           >
             <span className="mobile-nav-icon">{category.icon}</span>
             <span>{category.name}</span>
           </button>
         ))}
-        
-        {/* 统计按钮 */}
-        <button
-          className="mobile-nav-button"
-          onClick={() => {
-            alert(`数据统计：\n照片总数：${photos.length}\n显示数量：${filteredPhotos.length}`);
-          }}
-          style={{ '--button-color': '#00f2ff' }}
-        >
-          <span className="mobile-nav-icon">📊</span>
-          <span>统计</span>
-        </button>
       </div>
 
       {/* 主内容区域 */}
